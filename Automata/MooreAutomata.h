@@ -38,7 +38,6 @@ public:
         ReadTransitionsFromFile(file);
 
         file.close();
-        RemoveUnreachableStates();
     }
 
     void PrintToFile(const std::string &filename) const override {
