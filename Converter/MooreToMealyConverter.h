@@ -47,20 +47,19 @@ private:
 
         auto stateToOutputSymbolMap = GetStateToOutputSymbolMap(statesInfo);
 
-        for (auto& mooreRow : mooreTransitionTable)
+        for (const auto& mooreRow : mooreTransitionTable)
         {
             std::pair<std::string, std::vector<Transition>> mealyRow;
             mealyRow.first = mooreRow.first;
 
-            std::vector<Transition>& mealyTransitions = mealyRow.second;
-            for (std::string state : mooreRow.second)
+            for (const auto& state : mooreRow.second)
             {
-                std::string outputSymbol = stateToOutputSymbolMap[state];
-                state[0] = STATE_CHAR;
+                std::string modifiedState = state;
+                std::string outputSymbol = stateToOutputSymbolMap[modifiedState];
+                modifiedState[0] = STATE_CHAR;
 
-                Transition transition(state, outputSymbol);
-
-                mealyTransitions.emplace_back(transition);
+                Transition transition(modifiedState, outputSymbol);
+                mealyRow.second.emplace_back(transition);
             }
 
             mealyTransitionTable.emplace_back(std::move(mealyRow));

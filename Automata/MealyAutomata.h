@@ -49,10 +49,9 @@ public:
             throw std::invalid_argument("Could not open file " + filename + " for writing.");
         }
 
-        output << ";";
-        for (const auto &state : m_states)
+        for (const auto& state: m_states)
         {
-            output << state << ";";
+            output << ';' << state;
         }
         output << std::endl;
 
